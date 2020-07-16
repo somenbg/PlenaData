@@ -7,7 +7,7 @@ def user_input() -> str:
     input_text = input("Please enter a word: ")
 
     while not input_text.isalpha():
-        print('ERROR. Please enter alphabets only')
+        print('ERROR. Please enter alphabets only without spaces')
         input_text = user_input()
 
     return input_text
@@ -41,7 +41,7 @@ def generate_output(input_dict: dict) -> str:
     # Append only single instance events
     for i in input_dict.items():
         if len(i[1]) == 1:
-            output_string += i[0]
+            output_string += i[1]
 
     # Filtering out single instance events and sorting the dictionary
     filtered_dict = {k: v for k, v in sorted(input_dict.items(), key=lambda item: len(item[1]), reverse=True) if len(v) != 1}
