@@ -21,11 +21,11 @@ def word_to_dict(word: str) -> dict:
 
     dict_to_return = {}
 
-    for i in word.lower():
-        if dict_to_return.get(i):
-            dict_to_return[i] += 1
+    for i in word:
+        if dict_to_return.get(i.lower()):
+            dict_to_return[i.lower()] += i
         else:
-            dict_to_return[i] = 1
+            dict_to_return[i.lower()] = i
 
     return dict_to_return
 
@@ -40,14 +40,14 @@ def generate_output(input_dict: dict) -> str:
 
     # Append only single instance events
     for i in input_dict.items():
-        if i[1] == 1:
+        if len(i[1]) == 1:
             output_string += i[0]
 
     # Filtering out single instance events and sorting the dictionary
-    filtered_dict = {k: v for k, v in sorted(input_dict.items(), key=lambda item: item[1], reverse=True) if v != 1}
+    filtered_dict = {k: v for k, v in sorted(input_dict.items(), key=lambda item: len(item[1]), reverse=True) if len(v) != 1}
 
     for i in filtered_dict.items():
-        output_string += i[0] * i[1]
+        output_string += i[1]
 
     return output_string
 
